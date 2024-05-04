@@ -23,6 +23,8 @@ Consider installing `bun` to run the TypeScript code directly without compiling 
 ```bash
 pnpm install
 cd apps/server
+cp .env.template .env
+# fill in the .env file
 pnpm start
 ```
 
