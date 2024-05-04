@@ -1,0 +1,15 @@
+type Actor {
+	actedInMovies: [Movie!]! @relationship(type: "ACTED_IN", direction: OUT)
+	name: String!
+}
+
+type Movie {
+	actorsActedIn: [Actor!]! @relationship(type: "ACTED_IN", direction: IN)
+	title: String!
+}
+
+type User {
+	id: String!
+	password: String!
+	username: String!
+}

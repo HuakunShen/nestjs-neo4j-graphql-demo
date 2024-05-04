@@ -1,0 +1,8 @@
+mutation CreateMovies($input: [MovieCreateInput!]!) {
+  createMovies(input: $input) {
+    info {
+      nodesCreated
+      relationshipsCreated
+    }
+  }
+}
