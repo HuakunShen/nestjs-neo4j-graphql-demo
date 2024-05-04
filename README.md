@@ -1,53 +1,33 @@
 > NestJS Neo4j GraphQL Demo
 
-## Pre-requisites
+Turborepo monorepo is used because there are serveral packages that are used in this project.
+And NestJS insist on using old commonjs modules, while I like to use ESM modules for other packages.
 
-## Installation
+If any typescript in in NestJS project folder cannot be compiled (such as codegen), the entire server won't run even if the server code itself is correct. This is probably because `tsc` is used to compile the entire project, and it fails when it encounters a typescript file that cannot be compiled.
 
-```bash
-$ pnpm install
-```
+So I have to isolate NestJS project from other packages.
 
-## Running the app
+## Folder Structure
 
-```bash
-# development
-$ pnpm run start
+- [apps/server](./apps/server/)
+  - GraphQL server using NestJS and Neo4j
+- [packages/codegen](./packages/codegen/)
+  - Generate TypeScript types and client code from GraphQL server introspection
 
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
-```
-
-## Test
+## Start Server
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+pnpm install
+cd apps/server
+pnpm start
 ```
 
-## Support
+## Codegen
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+> Make sure the server is running before running the codegen
+> because codegen runs schema introspection on the server
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
-
-## Codegen for Client
-
-See `codegen` folder for how to use codegen to generate client code for the GraphQL schema.
+```bash
+cd packages/codegen
+pnpm codegen
+```
