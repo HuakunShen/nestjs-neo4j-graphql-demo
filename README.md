@@ -159,10 +159,22 @@ See these files for more details:
 
 ## Codegen
 
+https://the-guild.dev/graphql/codegen is used to generate TypeScript types and more from the GraphQL schema.
+
+Usually you provide the graphql schema file, but in this demo, the schema is designed for neo4j and not recognized by the codegen tool.
+
+You need to let `Neo4jGraphQL` generate the schema and deploy it to a server first, then provide the server's endpoint to the codegen tool.
+Then the codegen tool will introspect the schema from the server and generate the types.
+
 > Make sure the server is running before running the codegen
-> because codegen runs schema introspection on the server
 
 ```bash
 cd packages/codegen
 pnpm codegen
 ```
+
+The generated files are in the `packages/codegen/src/gql` folder.
+
+Sample operations can be added to `packages/codegen/operations`. Types and caller for operations will also be generated.
+
+Read the documentation of codegen for more details.
