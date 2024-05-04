@@ -1,4 +1,9 @@
-type Movie {
+type Mutation {
+  signUp(username: String!, password: String!): String
+  signIn(username: String!, password: String!): String
+}
+
+type Movie @authentication {
   title: String
   actors: [Actor!]! @relationship(type: "ACTED_IN", direction: IN)
 }
@@ -8,8 +13,19 @@ type Actor {
   movies: [Movie!]! @relationship(type: "ACTED_IN", direction: OUT)
 }
 
+
 type User @authentication {
-  id: ID!
-  name: String!
-  password: String!
+  id: ID! @id
+  username: String!
+  # this is just an example of how to use @authorization to restrict access to a field
+  # in reality, never store plaintext passwords in the database
+  plaintextPassword: String! @authorization(filter: [{
+    where: {
+      node: {
+        id: "$jwt.sub"
+      }
+    }
+  }])
+  password: String! @private
 }
+
