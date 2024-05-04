@@ -265,6 +265,12 @@ export type CreateMoviesMutationResponse = {
   movies: Array<Movie>;
 };
 
+export type CreateUsersMutationResponse = {
+  __typename?: 'CreateUsersMutationResponse';
+  info: CreateInfo;
+  users: Array<User>;
+};
+
 /** Information about the number of nodes and relationships deleted during a delete mutation */
 export type DeleteInfo = {
   __typename?: 'DeleteInfo';
@@ -272,6 +278,12 @@ export type DeleteInfo = {
   bookmark?: Maybe<Scalars['String']['output']>;
   nodesDeleted: Scalars['Int']['output'];
   relationshipsDeleted: Scalars['Int']['output'];
+};
+
+export type IdAggregateSelection = {
+  __typename?: 'IDAggregateSelection';
+  longest?: Maybe<Scalars['ID']['output']>;
+  shortest?: Maybe<Scalars['ID']['output']>;
 };
 
 export type Movie = {
@@ -504,10 +516,13 @@ export type Mutation = {
   __typename?: 'Mutation';
   createActors: CreateActorsMutationResponse;
   createMovies: CreateMoviesMutationResponse;
+  createUsers: CreateUsersMutationResponse;
   deleteActors: DeleteInfo;
   deleteMovies: DeleteInfo;
+  deleteUsers: DeleteInfo;
   updateActors: UpdateActorsMutationResponse;
   updateMovies: UpdateMoviesMutationResponse;
+  updateUsers: UpdateUsersMutationResponse;
 };
 
 
@@ -521,6 +536,11 @@ export type MutationCreateMoviesArgs = {
 };
 
 
+export type MutationCreateUsersArgs = {
+  input: Array<UserCreateInput>;
+};
+
+
 export type MutationDeleteActorsArgs = {
   delete?: InputMaybe<ActorDeleteInput>;
   where?: InputMaybe<ActorWhere>;
@@ -530,6 +550,11 @@ export type MutationDeleteActorsArgs = {
 export type MutationDeleteMoviesArgs = {
   delete?: InputMaybe<MovieDeleteInput>;
   where?: InputMaybe<MovieWhere>;
+};
+
+
+export type MutationDeleteUsersArgs = {
+  where?: InputMaybe<UserWhere>;
 };
 
 
@@ -552,6 +577,12 @@ export type MutationUpdateMoviesArgs = {
   where?: InputMaybe<MovieWhere>;
 };
 
+
+export type MutationUpdateUsersArgs = {
+  update?: InputMaybe<UserUpdateInput>;
+  where?: InputMaybe<UserWhere>;
+};
+
 /** Pagination information (Relay) */
 export type PageInfo = {
   __typename?: 'PageInfo';
@@ -569,6 +600,9 @@ export type Query = {
   movies: Array<Movie>;
   moviesAggregate: MovieAggregateSelection;
   moviesConnection: MoviesConnection;
+  users: Array<User>;
+  usersAggregate: UserAggregateSelection;
+  usersConnection: UsersConnection;
 };
 
 
@@ -609,6 +643,25 @@ export type QueryMoviesConnectionArgs = {
   where?: InputMaybe<MovieWhere>;
 };
 
+
+export type QueryUsersArgs = {
+  options?: InputMaybe<UserOptions>;
+  where?: InputMaybe<UserWhere>;
+};
+
+
+export type QueryUsersAggregateArgs = {
+  where?: InputMaybe<UserWhere>;
+};
+
+
+export type QueryUsersConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<UserSort>>>;
+  where?: InputMaybe<UserWhere>;
+};
+
 /** An enum for sorting in either ascending or descending order. */
 export enum SortDirection {
   /** Sort by field values in ascending order. */
@@ -646,12 +699,105 @@ export type UpdateMoviesMutationResponse = {
   movies: Array<Movie>;
 };
 
+export type UpdateUsersMutationResponse = {
+  __typename?: 'UpdateUsersMutationResponse';
+  info: UpdateInfo;
+  users: Array<User>;
+};
+
+export type User = {
+  __typename?: 'User';
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  password: Scalars['String']['output'];
+};
+
+export type UserAggregateSelection = {
+  __typename?: 'UserAggregateSelection';
+  count: Scalars['Int']['output'];
+  id: IdAggregateSelection;
+  name: StringAggregateSelection;
+  password: StringAggregateSelection;
+};
+
+export type UserCreateInput = {
+  id: Scalars['ID']['input'];
+  name: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+export type UserEdge = {
+  __typename?: 'UserEdge';
+  cursor: Scalars['String']['output'];
+  node: User;
+};
+
+export type UserOptions = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  /** Specify one or more UserSort objects to sort Users by. The sorts will be applied in the order in which they are arranged in the array. */
+  sort?: InputMaybe<Array<UserSort>>;
+};
+
+/** Fields to sort Users by. The order in which sorts are applied is not guaranteed when specifying many fields in one UserSort object. */
+export type UserSort = {
+  id?: InputMaybe<SortDirection>;
+  name?: InputMaybe<SortDirection>;
+  password?: InputMaybe<SortDirection>;
+};
+
+export type UserUpdateInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserWhere = {
+  AND?: InputMaybe<Array<UserWhere>>;
+  NOT?: InputMaybe<UserWhere>;
+  OR?: InputMaybe<Array<UserWhere>>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  id_CONTAINS?: InputMaybe<Scalars['ID']['input']>;
+  id_ENDS_WITH?: InputMaybe<Scalars['ID']['input']>;
+  id_IN?: InputMaybe<Array<Scalars['ID']['input']>>;
+  id_STARTS_WITH?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  name_CONTAINS?: InputMaybe<Scalars['String']['input']>;
+  name_ENDS_WITH?: InputMaybe<Scalars['String']['input']>;
+  name_IN?: InputMaybe<Array<Scalars['String']['input']>>;
+  name_STARTS_WITH?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+  password_CONTAINS?: InputMaybe<Scalars['String']['input']>;
+  password_ENDS_WITH?: InputMaybe<Scalars['String']['input']>;
+  password_IN?: InputMaybe<Array<Scalars['String']['input']>>;
+  password_STARTS_WITH?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UsersConnection = {
+  __typename?: 'UsersConnection';
+  edges: Array<UserEdge>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Int']['output'];
+};
+
 export type CreateMoviesMutationVariables = Exact<{
   input: Array<MovieCreateInput> | MovieCreateInput;
 }>;
 
 
 export type CreateMoviesMutation = { __typename?: 'Mutation', createMovies: { __typename?: 'CreateMoviesMutationResponse', info: { __typename?: 'CreateInfo', nodesCreated: number, relationshipsCreated: number } } };
+
+export type DeleteMoviesMutationVariables = Exact<{
+  where?: InputMaybe<MovieWhere>;
+}>;
+
+
+export type DeleteMoviesMutation = { __typename?: 'Mutation', deleteMovies: { __typename?: 'DeleteInfo', nodesDeleted: number } };
+
+export type MoviesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MoviesQuery = { __typename?: 'Query', movies: Array<{ __typename?: 'Movie', title?: string | null, actors: Array<{ __typename?: 'Actor', name?: string | null }> }> };
 
 
 export const CreateMoviesDocument = gql`
@@ -664,16 +810,41 @@ export const CreateMoviesDocument = gql`
   }
 }
     `;
+export const DeleteMoviesDocument = gql`
+    mutation DeleteMovies($where: MovieWhere) {
+  deleteMovies(where: $where) {
+    nodesDeleted
+  }
+}
+    `;
+export const MoviesDocument = gql`
+    query Movies {
+  movies {
+    title
+    actors {
+      name
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
 const CreateMoviesDocumentString = print(CreateMoviesDocument);
+const DeleteMoviesDocumentString = print(DeleteMoviesDocument);
+const MoviesDocumentString = print(MoviesDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     CreateMovies(variables: CreateMoviesMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: CreateMoviesMutation; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<CreateMoviesMutation>(CreateMoviesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateMovies', 'mutation', variables);
+    },
+    DeleteMovies(variables?: DeleteMoviesMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: DeleteMoviesMutation; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<DeleteMoviesMutation>(DeleteMoviesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteMovies', 'mutation', variables);
+    },
+    Movies(variables?: MoviesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: MoviesQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<MoviesQuery>(MoviesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Movies', 'query', variables);
     }
   };
 }

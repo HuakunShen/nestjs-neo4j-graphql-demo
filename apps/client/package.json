@@ -1,0 +1,17 @@
+{
+  "name": "client",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.10.2",
+    "@demo/codegen": "link:../../packages/codegen",
+    "codegen": "link:../../packages/codegen",
+    "graphql-request": "^6.1.0"
+  }
+}

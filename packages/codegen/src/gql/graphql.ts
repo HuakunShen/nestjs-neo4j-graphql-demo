@@ -785,5 +785,19 @@ export type CreateMoviesMutationVariables = Exact<{
 
 export type CreateMoviesMutation = { __typename?: 'Mutation', createMovies: { __typename?: 'CreateMoviesMutationResponse', info: { __typename?: 'CreateInfo', nodesCreated: number, relationshipsCreated: number } } };
 
+export type DeleteMoviesMutationVariables = Exact<{
+  where?: InputMaybe<MovieWhere>;
+}>;
+
+
+export type DeleteMoviesMutation = { __typename?: 'Mutation', deleteMovies: { __typename?: 'DeleteInfo', nodesDeleted: number } };
+
+export type MoviesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MoviesQuery = { __typename?: 'Query', movies: Array<{ __typename?: 'Movie', title?: string | null, actors: Array<{ __typename?: 'Actor', name?: string | null }> }> };
+
 
 export const CreateMoviesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateMovies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"MovieCreateInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createMovies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"info"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodesCreated"}},{"kind":"Field","name":{"kind":"Name","value":"relationshipsCreated"}}]}}]}}]}}]} as unknown as DocumentNode<CreateMoviesMutation, CreateMoviesMutationVariables>;
+export const DeleteMoviesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteMovies"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"MovieWhere"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteMovies"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodesDeleted"}}]}}]}}]} as unknown as DocumentNode<DeleteMoviesMutation, DeleteMoviesMutationVariables>;
+export const MoviesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Movies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"movies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"actors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<MoviesQuery, MoviesQueryVariables>;

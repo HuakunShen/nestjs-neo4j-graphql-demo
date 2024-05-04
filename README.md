@@ -14,6 +14,10 @@ So I have to isolate NestJS project from other packages.
 - [packages/codegen](./packages/codegen/)
   - Generate TypeScript types and client code from GraphQL server introspection
 
+## Prerequisites
+
+Consider installing `bun` to run the TypeScript code directly without compiling or worrying about module types.
+
 ## Start Server
 
 ```bash

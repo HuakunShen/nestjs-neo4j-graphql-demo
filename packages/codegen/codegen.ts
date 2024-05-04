@@ -10,6 +10,12 @@ const config: CodegenConfig = {
       preset: "client",
       plugins: []
     },
+    'src/gql/req.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typescript-graphql-request'],
+      config: {
+        rawRequest: true
+      },
+    },
     "./graphql.schema.json": {
       plugins: ["introspection"]
     }

@@ -14,6 +14,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "mutation CreateMovies($input: [MovieCreateInput!]!) {\n  createMovies(input: $input) {\n    info {\n      nodesCreated\n      relationshipsCreated\n    }\n  }\n}": types.CreateMoviesDocument,
+    "mutation DeleteMovies($where: MovieWhere) {\n  deleteMovies(where: $where) {\n    nodesDeleted\n  }\n}": types.DeleteMoviesDocument,
+    "query Movies {\n  movies {\n    title\n    actors {\n      name\n    }\n  }\n}": types.MoviesDocument,
 };
 
 /**
@@ -34,6 +36,14 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation CreateMovies($input: [MovieCreateInput!]!) {\n  createMovies(input: $input) {\n    info {\n      nodesCreated\n      relationshipsCreated\n    }\n  }\n}"): (typeof documents)["mutation CreateMovies($input: [MovieCreateInput!]!) {\n  createMovies(input: $input) {\n    info {\n      nodesCreated\n      relationshipsCreated\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation DeleteMovies($where: MovieWhere) {\n  deleteMovies(where: $where) {\n    nodesDeleted\n  }\n}"): (typeof documents)["mutation DeleteMovies($where: MovieWhere) {\n  deleteMovies(where: $where) {\n    nodesDeleted\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query Movies {\n  movies {\n    title\n    actors {\n      name\n    }\n  }\n}"): (typeof documents)["query Movies {\n  movies {\n    title\n    actors {\n      name\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

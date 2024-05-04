@@ -1,5 +1,5 @@
 {
-  "name": "nestjs-neo4j-graphql-demo",
+  "name": "@demo/nestjs-neo4j-graphql-demo",
   "version": "0.0.1",
   "description": "",
   "author": "",

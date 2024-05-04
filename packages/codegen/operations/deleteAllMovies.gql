@@ -1,0 +1,5 @@
+mutation DeleteMovies($where: MovieWhere) {
+  deleteMovies(where: $where) {
+    nodesDeleted
+  }
+}

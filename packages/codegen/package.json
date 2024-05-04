@@ -1,11 +1,12 @@
 {
-  "name": "codegen",
+  "name": "@demo/codegen",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
     "@graphql-codegen/client-preset": "4.2.5",
     "@graphql-codegen/introspection": "4.0.3",
+    "@graphql-codegen/typescript-graphql-request": "^6.2.0",
     "@types/bun": "latest",
     "typescript": "^5.4.5"
   },
@@ -14,9 +15,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.10.2",
-    "@graphql-codegen/typescript-graphql-request": "^6.2.0",
     "@neo4j/introspector": "^3.0.1",
     "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
     "neo4j-driver": "^5.20.0",
     "react": "^18.3.1"
   },
